@@ -29,12 +29,18 @@ const props = defineProps({
     default: null,
   },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7a8945a (ok)
   disabled: {
     type: Boolean,
     default: false,
   },
+<<<<<<< HEAD
 =======
 >>>>>>> 1795eef (ok)
+=======
+>>>>>>> 7a8945a (ok)
   icon: {
     type: String,
     default: null,
@@ -137,9 +143,13 @@ if (props.ctrlKFocus) {
     <select
       v-if="computedType === 'select'"
 <<<<<<< HEAD
+<<<<<<< HEAD
       :disabled="disabled"
 =======
 >>>>>>> 1795eef (ok)
+=======
+      :disabled="disabled"
+>>>>>>> 7a8945a (ok)
       :id="id"
       v-model="computedValue"
       :name="name"
@@ -151,18 +161,26 @@ if (props.ctrlKFocus) {
         :value="option"
       >
 <<<<<<< HEAD
+<<<<<<< HEAD
         {{ option.label ?? option.name ?? option }}
 =======
         {{ option.label ?? option }}
 >>>>>>> 1795eef (ok)
+=======
+        {{ option.label ?? option.name ?? option }}
+>>>>>>> 7a8945a (ok)
       </option>
     </select>
     <textarea
       v-else-if="computedType === 'textarea'"
 <<<<<<< HEAD
+<<<<<<< HEAD
       :disabled="disabled"
 =======
 >>>>>>> 1795eef (ok)
+=======
+      :disabled="disabled"
+>>>>>>> 7a8945a (ok)
       :id="id"
       v-model="computedValue"
       :class="inputElClass"
@@ -174,9 +192,13 @@ if (props.ctrlKFocus) {
     <input
       v-else
 <<<<<<< HEAD
+<<<<<<< HEAD
       :disabled="disabled"
 =======
 >>>>>>> 1795eef (ok)
+=======
+      :disabled="disabled"
+>>>>>>> 7a8945a (ok)
       :id="id"
       ref="inputEl"
       v-model="computedValue"

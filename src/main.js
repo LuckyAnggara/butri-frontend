@@ -17,6 +17,9 @@ import moment from "moment";
 import { useMainStore } from "@/stores/main.js";
 import { useStyleStore } from "@/stores/style.js";
 import { darkModeKey, styleKey } from "@/config.js";
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+import vClickOutside from "v-click-outside";
 
 >>>>>>> 1795eef (ok)
 import "./css/main.css";
@@ -25,6 +28,7 @@ import "./css/main.css";
 const pinia = createPinia();
 
 /* Create Vue app */
+<<<<<<< HEAD
 <<<<<<< HEAD
 const app = createApp(App);
 
@@ -45,6 +49,18 @@ app.mount("#app");
 =======
 createApp(App).use(router).use(pinia).mount("#app");
 >>>>>>> 1795eef (ok)
+=======
+createApp(App)
+  .use(router)
+  .use(pinia)
+  .use(vClickOutside)
+  .use(Toast, {
+    transition: "Vue-Toastification__bounce",
+    maxToasts: 20,
+    newestOnTop: true,
+  })
+  .mount("#app");
+>>>>>>> 7a8945a (ok)
 
 /* Init Pinia stores */
 const mainStore = useMainStore(pinia);

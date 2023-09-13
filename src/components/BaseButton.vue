@@ -121,8 +121,12 @@ const componentClass = computed(() => {
     <BaseIcon v-if="icon" :path="icon" :size="iconSize" />
     <span v-if="label" :class="labelClass">{{ label }}</span>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <slot></slot>
 =======
 >>>>>>> 1795eef (ok)
+=======
+    <slot></slot>
+>>>>>>> 7a8945a (ok)
   </component>
 </template>

@@ -17,13 +17,19 @@ export const useAuthStore = defineStore("auth", {
     userData: null,
   }),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7a8945a (ok)
   getters: {
     user() {
       return JSON.parse(localStorage.getItem("userDataLawas")) ?? {};
     },
   },
+<<<<<<< HEAD
 =======
 >>>>>>> 1795eef (ok)
+=======
+>>>>>>> 7a8945a (ok)
   actions: {
     async login() {
       this.isLoading = true;

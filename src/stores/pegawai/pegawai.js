@@ -8,8 +8,11 @@ const authStore = useAuthStore();
 export const usePegawaiStore = defineStore("pegawai", {
   state: () => ({
     responses: null,
+<<<<<<< HEAD
     singleResponses: null,
     originalSingleResponses: null,
+=======
+>>>>>>> 7a8945a (ok)
     isLoading: false,
     isStoreLoading: false,
     isUpdateLoading: false,
@@ -31,7 +34,11 @@ export const usePegawaiStore = defineStore("pegawai", {
       created_by: authStore.user.user.id,
     },
     searchName: "",
+<<<<<<< HEAD
     currentLimit: 5,
+=======
+    currentLimit: { id: 5, label: "5" },
+>>>>>>> 7a8945a (ok)
   }),
   getters: {
     items(state) {
@@ -67,7 +74,11 @@ export const usePegawaiStore = defineStore("pegawai", {
       this.isLoading = true;
       try {
         const response = await axiosIns.get(
+<<<<<<< HEAD
           `/employee?limit=${this.currentLimit}${this.searchQuery}${page}`
+=======
+          `/employee?limit=${this.currentLimit.id}${this.searchQuery}${page}`
+>>>>>>> 7a8945a (ok)
         );
 
         this.responses = response.data.data;
@@ -98,6 +109,7 @@ export const usePegawaiStore = defineStore("pegawai", {
         this.isStoreLoading = false;
       }
     },
+<<<<<<< HEAD
     async showData(id = "") {
       this.isLoading = true;
       try {
@@ -113,6 +125,8 @@ export const usePegawaiStore = defineStore("pegawai", {
       }
       this.isLoading = false;
     },
+=======
+>>>>>>> 7a8945a (ok)
     async destroy(id) {
       this.isDestroyLoading = true;
       setTimeout(() => {}, 1000);
@@ -131,6 +145,7 @@ export const usePegawaiStore = defineStore("pegawai", {
         this.isDestroyLoading = false;
       }
     },
+<<<<<<< HEAD
     async update() {
       this.isUpdateLoading = true;
       try {
@@ -160,5 +175,29 @@ export const usePegawaiStore = defineStore("pegawai", {
         JSON.stringify(this.originalSingleResponses)
       );
     },
+=======
+    // async update(inListProduct = true) {
+    //   this.isUpdateLoading = true;
+    //   try {
+    //     const response = await axiosIns.put(
+    //       `/employee/${this.singleResponses.id}`,
+    //       this.singleResponses
+    //     );
+    //     this.isTransactionSuccess = true;
+    //     // toast.success('Product successfully updated!', {
+    //     //   timeout: 2000,
+    //     // })
+    //     if (inListProduct) {
+    //       this.getData();
+    //     }
+    //   } catch (error) {
+    //     toast.error(error.message, {
+    //       timeout: 3000,
+    //     });
+    //   } finally {
+    //     this.isUpdateLoading = false;
+    //   }
+    // },
+>>>>>>> 7a8945a (ok)
   },
 });
