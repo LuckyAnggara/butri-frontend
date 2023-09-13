@@ -46,20 +46,28 @@ const props = defineProps({
     required: false,
     default:
 <<<<<<< HEAD
+<<<<<<< HEAD
       "block w-full p-4 pl-10 h-12 border px-3 py-2 max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full dark:placeholder-gray-400 bg-white dark:bg-slate-800",
 =======
       "block w-full p-4 pl-10 h-12 border   px-3 py-2 max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full dark:placeholder-gray-400 bg-white dark:bg-slate-800",
 >>>>>>> 7a8945a (ok)
+=======
+      "block w-full p-4 pl-10 h-12 border px-3 py-2 max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full dark:placeholder-gray-400 bg-white dark:bg-slate-800",
+>>>>>>> b48c708 (ok)
   },
   dropdownClass: {
     type: String,
     required: false,
     default:
 <<<<<<< HEAD
+<<<<<<< HEAD
       "absolute z-50 max-w-full border-gray-700 rounded w-full dark:placeholder-gray-400 bg-gray-100 shadow-lg dark:bg-slate-700",
 =======
       "max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full dark:placeholder-gray-400 bg-white dark:bg-slate-800",
 >>>>>>> 7a8945a (ok)
+=======
+      "absolute z-50 max-w-full border-gray-700 rounded w-full dark:placeholder-gray-400 bg-white dark:bg-slate-800",
+>>>>>>> b48c708 (ok)
   },
 });
 
@@ -90,6 +98,7 @@ async function handleInput(evt) {
 
 function handleClick(item) {
 <<<<<<< HEAD
+<<<<<<< HEAD
   // emit("update:modelValue", item.name);
   emit("chosen", item);
   // showOptions.value = false;
@@ -98,6 +107,11 @@ function handleClick(item) {
   emit("chosen", item);
   showOptions.value = false;
 >>>>>>> 7a8945a (ok)
+=======
+  // emit("update:modelValue", item.name);
+  emit("chosen", item);
+  // showOptions.value = false;
+>>>>>>> b48c708 (ok)
 }
 
 function clickedOutside() {
