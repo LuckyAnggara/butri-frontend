@@ -81,35 +81,37 @@ onMounted(() => {
   <SectionMain>
     <SectionTitleLineWithButton :title="route.meta.title" main />
 
-    <div class="w-full my-4 flex flex-row space-x-4">
-      <div class="w-3/12">
-        <FormField label="Show">
-          <FormControl
-            v-model="pegawaiStore.currentLimit"
-            :options="mainStore.limitDataOptions"
+    <CardBox class="mb-4 px-4" has-table>
+      <div class="w-full my-4 flex flex-row space-x-4">
+        <div class="w-3/12">
+          <FormField label="Show">
+            <FormControl
+              v-model="pegawaiStore.currentLimit"
+              :options="mainStore.limitDataOptions"
+            />
+          </FormField>
+        </div>
+        <div class="w-6/12">
+          <FormField label="Search">
+            <FormControl
+              @keyup="search"
+              v-model="pegawaiStore.searchName"
+              type="tel"
+              placeholder="Cari berdasarkan nama / nip"
+            />
+          </FormField>
+        </div>
+        <div class="w-3/12 flex justify-end">
+          <BaseButton
+            @click="toNewPegawai()"
+            class="mt-8"
+            type="submit"
+            color="info"
+            label="Tambah"
           />
-        </FormField>
+        </div>
       </div>
-      <div class="w-6/12">
-        <FormField label="Search">
-          <FormControl
-            @keyup="search"
-            v-model="pegawaiStore.searchName"
-            type="tel"
-            placeholder="Cari berdasarkan nama / nip"
-          />
-        </FormField>
-      </div>
-      <div class="w-3/12 flex justify-end">
-        <BaseButton
-          @click="toNewPegawai()"
-          class="mt-8"
-          type="submit"
-          color="info"
-          label="Tambah"
-        />
-      </div>
-    </div>
+    </CardBox>
 
     <NotificationBar
       v-if="pegawaiStore.isDestroyLoading"

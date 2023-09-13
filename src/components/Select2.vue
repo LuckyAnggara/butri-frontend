@@ -38,13 +38,13 @@ const props = defineProps({
     type: String,
     required: false,
     default:
-      "block w-full p-4 pl-10 h-12 border   px-3 py-2 max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full dark:placeholder-gray-400 bg-white dark:bg-slate-800",
+      "block w-full p-4 pl-10 h-12 border px-3 py-2 max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full dark:placeholder-gray-400 bg-white dark:bg-slate-800",
   },
   dropdownClass: {
     type: String,
     required: false,
     default:
-      "max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full dark:placeholder-gray-400 bg-white dark:bg-slate-800",
+      "absolute z-50 max-w-full border-gray-700 rounded w-full dark:placeholder-gray-400 bg-white dark:bg-slate-800",
   },
 });
 
@@ -74,9 +74,9 @@ async function handleInput(evt) {
 }
 
 function handleClick(item) {
-  emit("update:modelValue", item.name);
+  // emit("update:modelValue", item.name);
   emit("chosen", item);
-  showOptions.value = false;
+  // showOptions.value = false;
 }
 
 function clickedOutside() {
