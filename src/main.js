@@ -3,6 +3,7 @@ import { createPinia } from "pinia";
 
 import App from "./App.vue";
 import router from "./router";
+<<<<<<< HEAD
 
 import { useMainStore } from "@/stores/main.js";
 import { useStyleStore } from "@/stores/style.js";
@@ -12,12 +13,19 @@ import "vue-toastification/dist/index.css";
 import vClickOutside from "v-click-outside";
 import VueTailwindDatepicker from "vue-tailwind-datepicker";
 import moment from "moment";
+=======
+import { useMainStore } from "@/stores/main.js";
+import { useStyleStore } from "@/stores/style.js";
+import { darkModeKey, styleKey } from "@/config.js";
+
+>>>>>>> 1795eef (ok)
 import "./css/main.css";
 
 /* Init Pinia */
 const pinia = createPinia();
 
 /* Create Vue app */
+<<<<<<< HEAD
 const app = createApp(App);
 
 app.config.globalProperties = {
@@ -34,11 +42,21 @@ app.use(Toast, {
   newestOnTop: true,
 });
 app.mount("#app");
+=======
+createApp(App).use(router).use(pinia).mount("#app");
+>>>>>>> 1795eef (ok)
 
 /* Init Pinia stores */
 const mainStore = useMainStore(pinia);
 const styleStore = useStyleStore(pinia);
 
+<<<<<<< HEAD
+=======
+/* Fetch sample data */
+mainStore.fetch("clients");
+mainStore.fetch("history");
+
+>>>>>>> 1795eef (ok)
 /* App style */
 styleStore.setStyle(localStorage[styleKey] ?? "basic");
 
@@ -52,7 +70,11 @@ if (
 }
 
 /* Default title tag */
+<<<<<<< HEAD
 const defaultDocumentTitle = "Laporan Pengawasan";
+=======
+const defaultDocumentTitle = "Admin One Vue 3 Tailwind";
+>>>>>>> 1795eef (ok)
 
 /* Set document title from route meta */
 router.afterEach((to) => {

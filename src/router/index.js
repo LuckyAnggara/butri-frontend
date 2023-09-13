@@ -1,12 +1,28 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import UserDashboard from "@/views/Dashboard/UserDashboard.vue";
 import { useAuthStore } from "@/stores/auth";
+<<<<<<< HEAD
 import { kepegawaian } from "./kepegawaian";
 import { all } from "./all";
+=======
+>>>>>>> 1795eef (ok)
 
 const routes = [
   {
     meta: {
+<<<<<<< HEAD
+=======
+      title: "Dashboard",
+      layout: "layout-authenticated",
+      requiresAuth: true,
+    },
+    path: "/",
+    name: "dashboard",
+    component: UserDashboard,
+  },
+  {
+    meta: {
+>>>>>>> 1795eef (ok)
       title: "Login",
       layout: "layout-guest",
       requiresAuth: false,
@@ -17,6 +33,10 @@ const routes = [
   },
   {
     // Document title tag
+<<<<<<< HEAD
+=======
+    // We combine it with defaultDocumentTitle set in `src/main.js` on router.afterEach hook
+>>>>>>> 1795eef (ok)
     meta: {
       title: "Dashboard",
       requiresAuth: true,
@@ -27,6 +47,19 @@ const routes = [
   },
   {
     meta: {
+<<<<<<< HEAD
+=======
+      title: "Data Pegawai",
+      layout: "layout-authenticated",
+      requiresAuth: false,
+    },
+    path: "/pegawai/list",
+    name: "list-pegawai",
+    component: () => import("@/views/Kepegawaian/DataPegawai.vue"),
+  },
+  {
+    meta: {
+>>>>>>> 1795eef (ok)
       title: "Forms",
     },
     path: "/forms",
@@ -57,6 +90,10 @@ const routes = [
     name: "responsive",
     component: () => import("@/views/ResponsiveView.vue"),
   },
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1795eef (ok)
   {
     meta: {
       title: "Error",
@@ -65,8 +102,11 @@ const routes = [
     name: "error",
     component: () => import("@/views/ErrorView.vue"),
   },
+<<<<<<< HEAD
   ...kepegawaian,
   ...all,
+=======
+>>>>>>> 1795eef (ok)
 ];
 
 const router = createRouter({

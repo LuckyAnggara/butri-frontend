@@ -25,7 +25,11 @@ const hasSlot = computed(() => useSlots().default);
   >
     <div class="flex items-center justify-start">
       <IconRounded v-if="icon && main" color="light" class="mr-3" bg />
+<<<<<<< HEAD
       <BaseIcon v-else-if="icon" :is="icon" class="mr-2" size="20" />
+=======
+      <BaseIcon v-else-if="icon" :path="icon" class="mr-2" size="20" />
+>>>>>>> 1795eef (ok)
       <h1 :class="main ? 'text-3xl' : 'text-2xl'" class="leading-tight">
         {{ title }}
       </h1>

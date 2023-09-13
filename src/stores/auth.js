@@ -1,6 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { defineStore, getActivePinia } from "pinia";
 import axiosIns from "@/services/axios";
+<<<<<<< HEAD
+=======
+import { syncRef } from "@vueuse/core";
+>>>>>>> 1795eef (ok)
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
@@ -12,11 +16,14 @@ export const useAuthStore = defineStore("auth", {
     isLoading: false,
     userData: null,
   }),
+<<<<<<< HEAD
   getters: {
     user() {
       return JSON.parse(localStorage.getItem("userDataLawas")) ?? {};
     },
   },
+=======
+>>>>>>> 1795eef (ok)
   actions: {
     async login() {
       this.isLoading = true;

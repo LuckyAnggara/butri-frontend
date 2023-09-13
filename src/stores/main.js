@@ -15,6 +15,7 @@ export const useMainStore = defineStore("main", {
     clients: [],
     history: [],
 
+<<<<<<< HEAD
     limitDataOptions: [5, 50, 100, 100000],
     jenisKegiatanOptions: [
       "RAPAT INTERNAL",
@@ -22,6 +23,13 @@ export const useMainStore = defineStore("main", {
       "DINAS LUAR",
       "KOORDINASI",
       "KONSINYERING",
+=======
+    limitDataOptions: [
+      { id: 5, label: "5" },
+      { id: 50, label: "50" },
+      { id: 100, label: "100" },
+      { id: 100000, label: "Semua" },
+>>>>>>> 1795eef (ok)
     ],
   }),
   actions: {

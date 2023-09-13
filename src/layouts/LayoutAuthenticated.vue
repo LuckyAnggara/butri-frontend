@@ -1,7 +1,13 @@
 <script setup>
 import { mdiForwardburger, mdiBackburger, mdiMenu } from "@mdi/js";
+<<<<<<< HEAD
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
+=======
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import menuAside from "@/menuAside.js";
+>>>>>>> 1795eef (ok)
 import menuNavBar from "@/menuNavBar.js";
 import { useStyleStore } from "@/stores/style.js";
 import BaseIcon from "@/components/BaseIcon.vue";
@@ -10,12 +16,15 @@ import NavBarItemPlain from "@/components/NavBarItemPlain.vue";
 import AsideMenu from "@/components/AsideMenu.vue";
 import FooterBar from "@/components/FooterBar.vue";
 import { useAuthStore } from "@/stores/auth";
+<<<<<<< HEAD
 import kepegawaian from "@/router/menu/kepegawaian";
 import sip from "@/router/menu/sip";
 import umum from "@/router/menu/umum";
 import program from "@/router/menu/program";
 import keuangan from "@/router/menu/keuangan";
 import wilayah from "@/router/menu/wilayah";
+=======
+>>>>>>> 1795eef (ok)
 
 // useMainStore().setUser({
 //   name: "John Doe",
@@ -50,6 +59,7 @@ const menuClick = async (event, item) => {
     }
   }
 };
+<<<<<<< HEAD
 const menu = computed(() => {
   if (authStore.user.user?.role.name == "kepegawaian") return kepegawaian;
   if (authStore.user.user?.role.name == "program dan pelaporan") return program;
@@ -58,6 +68,8 @@ const menu = computed(() => {
   if (authStore.user.user?.role.name == "keuangan") return keuangan;
   if (authStore.user.user?.role.name == "inspektorat wilayah") return wilayah;
 });
+=======
+>>>>>>> 1795eef (ok)
 </script>
 
 <template>
@@ -98,7 +110,11 @@ const menu = computed(() => {
       <AsideMenu
         :is-aside-mobile-expanded="isAsideMobileExpanded"
         :is-aside-lg-active="isAsideLgActive"
+<<<<<<< HEAD
         :menu="menu"
+=======
+        :menu="menuAside"
+>>>>>>> 1795eef (ok)
         @menu-click="menuClick"
         @aside-lg-close-click="isAsideLgActive = false"
       />

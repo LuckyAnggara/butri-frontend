@@ -2,7 +2,11 @@
   "prettier/prettier": [
     "error",
     {
+<<<<<<< HEAD
       "singleQuote": false,
+=======
+      "singleQuote": true,
+>>>>>>> 1795eef (ok)
       "parser": "flow"
     }
   ]

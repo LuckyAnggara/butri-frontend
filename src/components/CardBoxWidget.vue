@@ -47,6 +47,16 @@ defineProps({
   <CardBox>
     <BaseLevel v-if="trend" class="mb-3" mobile>
       <PillTagTrend :trend="trend" :trend-type="trendType" small />
+<<<<<<< HEAD
+=======
+      <BaseButton
+        :icon="mdiCog"
+        icon-w="w-4"
+        icon-h="h-4"
+        color="lightDark"
+        small
+      />
+>>>>>>> 1795eef (ok)
     </BaseLevel>
     <BaseLevel mobile>
       <div>
