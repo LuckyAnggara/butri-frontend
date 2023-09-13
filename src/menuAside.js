@@ -24,7 +24,21 @@ export default [
     label: "Pegawai",
     icon: mdiTable,
   },
-
+  {
+    to: "/pegawai/mutasi",
+    label: "Mutasi",
+    icon: mdiTable,
+  },
+  {
+    to: "/pegawai/pengembangan",
+    label: "Pengembangan",
+    icon: mdiTable,
+  },
+  {
+    to: "/pegawai/pensiun",
+    label: "Pensiun",
+    icon: mdiTable,
+  },
   {
     to: "/forms",
     label: "Forms",

@@ -6,6 +6,9 @@ import router from "./router";
 import { useMainStore } from "@/stores/main.js";
 import { useStyleStore } from "@/stores/style.js";
 import { darkModeKey, styleKey } from "@/config.js";
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+import vClickOutside from "v-click-outside";
 
 import "./css/main.css";
 
@@ -13,7 +16,16 @@ import "./css/main.css";
 const pinia = createPinia();
 
 /* Create Vue app */
-createApp(App).use(router).use(pinia).mount("#app");
+createApp(App)
+  .use(router)
+  .use(pinia)
+  .use(vClickOutside)
+  .use(Toast, {
+    transition: "Vue-Toastification__bounce",
+    maxToasts: 20,
+    newestOnTop: true,
+  })
+  .mount("#app");
 
 /* Init Pinia stores */
 const mainStore = useMainStore(pinia);

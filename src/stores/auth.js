@@ -13,6 +13,11 @@ export const useAuthStore = defineStore("auth", {
     isLoading: false,
     userData: null,
   }),
+  getters: {
+    user() {
+      return JSON.parse(localStorage.getItem("userDataLawas")) ?? {};
+    },
+  },
   actions: {
     async login() {
       this.isLoading = true;

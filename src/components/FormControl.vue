@@ -28,6 +28,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
   icon: {
     type: String,
     default: null,
@@ -129,6 +133,7 @@ if (props.ctrlKFocus) {
   <div class="relative">
     <select
       v-if="computedType === 'select'"
+      :disabled="disabled"
       :id="id"
       v-model="computedValue"
       :name="name"
@@ -139,11 +144,12 @@ if (props.ctrlKFocus) {
         :key="option.id ?? option"
         :value="option"
       >
-        {{ option.label ?? option }}
+        {{ option.label ?? option.name ?? option }}
       </option>
     </select>
     <textarea
       v-else-if="computedType === 'textarea'"
+      :disabled="disabled"
       :id="id"
       v-model="computedValue"
       :class="inputElClass"
@@ -154,6 +160,7 @@ if (props.ctrlKFocus) {
     />
     <input
       v-else
+      :disabled="disabled"
       :id="id"
       ref="inputEl"
       v-model="computedValue"

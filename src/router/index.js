@@ -46,6 +46,46 @@ const routes = [
   },
   {
     meta: {
+      title: "Tambah Pegawai",
+      layout: "layout-authenticated",
+      requiresAuth: false,
+    },
+    path: "/pegawai/new",
+    name: "new-pegawai",
+    component: () => import("@/views/Kepegawaian/NewPegawai.vue"),
+  },
+  {
+    meta: {
+      title: "Pensiun Pegawai",
+      layout: "layout-authenticated",
+      requiresAuth: false,
+    },
+    path: "/pegawai/pensiun",
+    name: "pensiun-pegawai",
+    component: () => import("@/views/Kepegawaian/PensiunPegawai.vue"),
+  },
+  {
+    meta: {
+      title: "Mutasi Pegawai",
+      layout: "layout-authenticated",
+      requiresAuth: false,
+    },
+    path: "/pegawai/mutasi",
+    name: "mutasi-pegawai",
+    component: () => import("@/views/Kepegawaian/MutasiPegawai.vue"),
+  },
+  {
+    meta: {
+      title: "Pengembangan Pegawai",
+      layout: "layout-authenticated",
+      requiresAuth: false,
+    },
+    path: "/pegawai/pengembangan",
+    name: "pengembangan-pegawai",
+    component: () => import("@/views/Kepegawaian/PengembanganPegawai.vue"),
+  },
+  {
+    meta: {
       title: "Forms",
     },
     path: "/forms",
