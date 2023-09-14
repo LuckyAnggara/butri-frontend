@@ -25,17 +25,17 @@ export default [
     icon: mdiTable,
   },
   {
-    to: "/pegawai/mutasi",
+    to: "/pegawai/mutasi/list",
     label: "Mutasi",
     icon: mdiTable,
   },
   {
-    to: "/pegawai/pengembangan",
+    to: "/pegawai/pengembangan/list",
     label: "Pengembangan",
     icon: mdiTable,
   },
   {
-    to: "/pegawai/pensiun",
+    to: "/pegawai/pensiun/list",
     label: "Pensiun",
     icon: mdiTable,
   },

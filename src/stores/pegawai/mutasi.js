@@ -5,32 +5,31 @@ import { useAuthStore } from "../auth";
 import { useToast } from "vue-toastification";
 const toast = useToast();
 const authStore = useAuthStore();
-export const usePegawaiStore = defineStore("pegawai", {
+export const useMutasiStore = defineStore("mutasi", {
   state: () => ({
     responses: null,
     singleResponses: null,
     originalSingleResponses: null,
+    isUpdateLoading: false,
     isLoading: false,
     isStoreLoading: false,
     isUpdateLoading: false,
     isDestroyLoading: false,
     userData: null,
-    newPegawai: {
-      name: "",
-      nip: "",
-      is_wa: false,
-      gender: "",
-      phone_number: "",
-      email: "",
-      jabatan: "",
-      tmt_jabatan: "",
-      pangkat: "",
-      tmt_pangkat: "",
-      unit: "",
-      tmt_pensiun: "",
+    form: {
+      kegiatan: "",
+      waktu: {
+        startDate: "",
+        endDate: "",
+      },
+      tempat: "",
+      list: [],
       created_by: authStore.user.user.id,
     },
-    searchName: "",
+    filter: {
+      date: [],
+      searchQuery: "",
+    },
     currentLimit: { id: 5, label: "5" },
   }),
   getters: {
@@ -55,11 +54,22 @@ export const usePegawaiStore = defineStore("pegawai", {
     total(state) {
       return state.responses?.total;
     },
-    searchQuery(state) {
-      if (state.searchName == "" || state.searchName == null) {
+    dateQuery(state) {
+      if (state.filter.date.length == 0 || state.filter.date.length == null) {
         return "";
       }
-      return "&name=" + state.searchName;
+      return (
+        "&start-date=" +
+        state.filter.date[0] +
+        "&end-date=" +
+        state.filter.date[1]
+      );
+    },
+    searchQuery(state) {
+      if (state.filter.searchQuery == "" || state.filter.searchQuery == null) {
+        return "";
+      }
+      return "&query=" + state.filter.searchQuery;
     },
   },
   actions: {
@@ -67,9 +77,8 @@ export const usePegawaiStore = defineStore("pegawai", {
       this.isLoading = true;
       try {
         const response = await axiosIns.get(
-          `/employee?limit=${this.currentLimit.id}${this.searchQuery}${page}`
+          `/mutasi?limit=${this.currentLimit.id}${this.searchQuery}${page}${this.dateQuery}`
         );
-
         this.responses = response.data.data;
       } catch (error) {
         alert(error.message);
@@ -81,9 +90,9 @@ export const usePegawaiStore = defineStore("pegawai", {
     async store() {
       this.isStoreLoading = true;
       try {
-        const response = await axiosIns.post(`/employee`, this.newPegawai);
+        const response = await axiosIns.post(`/mutasi`, this.form);
         if (response.status == 200) {
-          toast.success(response.message, {
+          toast.success("Data berhasil dibuat", {
             timeout: 3000,
           });
           return true;
@@ -91,6 +100,7 @@ export const usePegawaiStore = defineStore("pegawai", {
           return false;
         }
       } catch (error) {
+        console.info(error);
         toast.error(error.response.data.data, {
           timeout: 3000,
         });
@@ -101,7 +111,7 @@ export const usePegawaiStore = defineStore("pegawai", {
     async showData(id = "") {
       this.isLoading = true;
       try {
-        const response = await axiosIns.get(`/employee/${id}`);
+        const response = await axiosIns.get(`/mutasi/${id}`);
         this.singleResponses = JSON.parse(JSON.stringify(response.data.data));
         this.originalSingleResponses = JSON.parse(
           JSON.stringify(response.data.data)
@@ -115,9 +125,9 @@ export const usePegawaiStore = defineStore("pegawai", {
     },
     async destroy(id) {
       this.isDestroyLoading = true;
-      setTimeout(() => {}, 1000);
+      setTimeout(() => {}, 500);
       try {
-        await axiosIns.delete(`/employee/${id}`);
+        await axiosIns.delete(`/mutasi/${id}`);
         toast.success("Data berhasil di hapus", {
           timeout: 2000,
         });
@@ -135,26 +145,48 @@ export const usePegawaiStore = defineStore("pegawai", {
       this.isUpdateLoading = true;
       try {
         const response = await axiosIns.put(
-          `/employee/${this.singleResponses.id}`,
+          `/mutasi/${this.singleResponses.id}`,
           this.singleResponses
         );
         if (response.status == 200) {
           toast.success(response.data.message, {
-            timeout: 3000,
+            timeout: 2000,
           });
+          this.originalSingleResponses = JSON.parse(
+            JSON.stringify(response.data.data)
+          );
           return true;
         } else {
           return false;
         }
       } catch (error) {
         toast.error(error.message, {
-          timeout: 3000,
+          timeout: 2000,
         });
       } finally {
         this.isUpdateLoading = false;
       }
     },
-
+    addFormDataEdit(payload) {
+      const b = this.singleResponses.list.filter((x) => x.id == payload.id);
+      if (b.length > 0) {
+        toast.info(`Data sudah ada`, {
+          timeout: 1200,
+        });
+      } else {
+        this.singleResponses.list.push(payload);
+      }
+    },
+    addFormData(payload) {
+      const b = this.form.list.filter((x) => x.id == payload.id);
+      if (b.length > 0) {
+        toast.info(`Data sudah ada`, {
+          timeout: 1200,
+        });
+      } else {
+        this.form.list.push(payload);
+      }
+    },
     editReset() {
       this.singleResponses = JSON.parse(
         JSON.stringify(this.originalSingleResponses)

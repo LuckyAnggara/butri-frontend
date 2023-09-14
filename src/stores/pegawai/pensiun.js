@@ -14,13 +14,17 @@ export const usePensiunStore = defineStore("pensiun", {
     isDestroyLoading: false,
     userData: null,
     form: {
-      sk: "",
+      nomor_sk: "",
+      tentang: "",
       notes: "",
       date: "",
       list: [],
       created_by: authStore.user.user.id,
     },
-    searchName: "",
+    filter: {
+      date: [],
+      searchQuery: "",
+    },
     currentLimit: { id: 5, label: "5" },
   }),
   getters: {
@@ -45,11 +49,22 @@ export const usePensiunStore = defineStore("pensiun", {
     total(state) {
       return state.responses?.total;
     },
-    searchQuery(state) {
-      if (state.searchName == "" || state.searchName == null) {
+    dateQuery(state) {
+      if (state.filter.date.length == 0 || state.filter.date.length == null) {
         return "";
       }
-      return "&name=" + state.searchName;
+      return (
+        "&start-date=" +
+        state.filter.date[0] +
+        "&end-date=" +
+        state.filter.date[1]
+      );
+    },
+    searchQuery(state) {
+      if (state.filter.searchQuery == "" || state.filter.searchQuery == null) {
+        return "";
+      }
+      return "&query=" + state.filter.searchQuery;
     },
   },
   actions: {
@@ -57,7 +72,7 @@ export const usePensiunStore = defineStore("pensiun", {
       this.isLoading = true;
       try {
         const response = await axiosIns.get(
-          `/employee?limit=${this.currentLimit.id}${this.searchQuery}${page}`
+          `/pensiun?limit=${this.currentLimit.id}${this.searchQuery}${page}${this.dateQuery}`
         );
         this.responses = response.data.data;
       } catch (error) {
@@ -70,9 +85,9 @@ export const usePensiunStore = defineStore("pensiun", {
     async store() {
       this.isStoreLoading = true;
       try {
-        const response = await axiosIns.post(`/employee`, this.newPegawai);
+        const response = await axiosIns.post(`/pensiun`, this.form);
         if (response.status == 200) {
-          toast.success(response.message, {
+          toast.success("Data berhasil dibuat", {
             timeout: 3000,
           });
           return true;
@@ -87,9 +102,26 @@ export const usePensiunStore = defineStore("pensiun", {
         this.isStoreLoading = false;
       }
     },
+    async destroy(id) {
+      this.isDestroyLoading = true;
+      setTimeout(() => {}, 500);
+      try {
+        await axiosIns.delete(`/pensiun/${id}`);
+        toast.success("Data berhasil di hapus", {
+          timeout: 2000,
+        });
+        const index = this.items.findIndex((item) => item.id === id);
+        this.responses.data.splice(index, 1);
+      } catch (error) {
+        toast.error(error.message, {
+          timeout: 2000,
+        });
+      } finally {
+        this.isDestroyLoading = false;
+      }
+    },
     addFormData(payload) {
       const b = this.form.list.filter((x) => x.id == payload.id);
-      console.info(b);
       if (b.length > 0) {
         toast.info(`Data sudah ada`, {
           timeout: 1200,

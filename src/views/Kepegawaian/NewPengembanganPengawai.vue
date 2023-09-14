@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
@@ -7,19 +7,20 @@ import { useRoute, useRouter } from "vue-router";
 import { usePegawaiStore } from "@/stores/pegawai/pegawai";
 import Select2 from "@/components/Select2.vue";
 import { useDebounceFn } from "@vueuse/core";
-import { usePensiunStore } from "@/stores/pegawai/pensiun";
 import { ArrowPathIcon, TrashIcon } from "@heroicons/vue/24/outline";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
 import VueTailwindDatepicker from "vue-tailwind-datepicker";
 import BaseDivider from "@/components/BaseDivider.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import { useToast } from "vue-toastification";
+import { usePengembanganStore } from "@/stores/pegawai/pengembangan";
 
 const route = useRoute();
 const router = useRouter();
-
+const toast = useToast();
 const pegawaiStore = usePegawaiStore();
-const pensiunStore = usePensiunStore();
+const pengembanganStore = usePengembanganStore();
 
 const search = ref("");
 
@@ -28,17 +29,28 @@ const formatter = ref({
 });
 
 async function submit() {
-  const result = await pegawaiStore.store();
-  if (result) {
-    router.push({ name: "list-pegawai" });
+  if (
+    pengembanganStore.form.list.length > 0 &&
+    (pengembanganStore.form.kegiatan ||
+      pengembanganStore.form.tempat ||
+      pengembanganStore.form.waktu.startDate ||
+      pengembanganStore.form.waktu.endDate)
+  ) {
+    const result = await pengembanganStore.store();
+    if (result) {
+      router.push({ name: "list-pengembangan-pegawai" });
+    }
+  } else {
+    toast.error("Data belum lengkap", { timeout: 2000 });
+    return false;
   }
 }
 
 function handleChosen(payload) {
-  pensiunStore.addFormData(payload);
+  pengembanganStore.addFormData(payload);
 }
 function destroy(index) {
-  pensiunStore.form.list.splice(index, 1);
+  pengembanganStore.form.list.splice(index, 1);
 }
 
 const find = useDebounceFn((x) => {
@@ -50,6 +62,9 @@ onMounted(() => {
   if (pegawaiStore.items.length <= 0) {
     pegawaiStore.getData();
   }
+});
+onUnmounted(() => {
+  pengembanganStore.$reset();
 });
 </script>
 
@@ -72,22 +87,37 @@ onMounted(() => {
           ></Select2>
         </div>
 
-        <FormField label="Surat Keputusan">
+        <FormField label="Nama Kegiatan">
           <FormControl
-            :type="'textarea'"
-            :disabled="pensiunStore.isStoreLoading"
-            v-model="pensiunStore.form.sk"
+            :disabled="pengembanganStore.isStoreLoading"
+            v-model="pengembanganStore.form.kegiatan"
             required
           />
         </FormField>
 
-        <FormField label="Tanggal Keputusan">
-          <vue-tailwind-datepicker
-            :disabled="pensiunStore.isStoreLoading"
+        <FormField label="Tempat Pelaksanaan">
+          <FormControl
+            :disabled="pengembanganStore.isStoreLoading"
+            v-model="pengembanganStore.form.tempat"
             required
-            v-model="pensiunStore.form.date"
+          />
+        </FormField>
+
+        <FormField label="Jumlah Peserta">
+          <Input
+            :disabled="true"
+            :value="pengembanganStore.form.list.length"
+            class="h-12 border px-3 py-2 max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full dark:placeholder-gray-400 bg-white dark:bg-slate-800"
+          />
+        </FormField>
+
+        <FormField label="Tanggal Kegiatan">
+          <vue-tailwind-datepicker
+            :disabled="pengembanganStore.isStoreLoading"
+            required
+            placeholder="Mulai sampai dengan berakhir"
+            v-model="pengembanganStore.form.waktu"
             :formatter="formatter"
-            as-single
             input-classes="h-12 border  px-3 py-2 max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full dark:placeholder-gray-400 bg-white dark:bg-slate-800"
           />
         </FormField>
@@ -95,8 +125,8 @@ onMounted(() => {
         <FormField label="Catatan">
           <FormControl
             :type="'textarea'"
-            :disabled="pensiunStore.isStoreLoading"
-            v-model="pensiunStore.form.notes"
+            :disabled="pengembanganStore.isStoreLoading"
+            v-model="pengembanganStore.form.notes"
           />
         </FormField>
       </CardBox>
@@ -111,14 +141,14 @@ onMounted(() => {
             </tr>
           </thead>
           <tbody>
-            <tr v-if="pensiunStore.form.list.length == 0">
+            <tr v-if="pengembanganStore.form.list.length == 0">
               <td colspan="4" class="text-center">
                 <span>Belum ada data</span>
               </td>
             </tr>
             <tr
               v-else
-              v-for="(item, index) in pensiunStore.form.list"
+              v-for="(item, index) in pengembanganStore.form.list"
               :key="item.id"
             >
               <td class="text-center">
@@ -140,17 +170,20 @@ onMounted(() => {
         </table>
       </CardBox>
     </div>
-    <CardBox class="mt-2 flex flex-row">
-      <BaseButton
-        :disabled="pegawaiStore.isStoreLoading"
-        @click="submit"
-        color="info"
-        ><span v-if="!pegawaiStore.isStoreLoading">Submit</span
-        ><span class="flex flex-row items-center" v-else>
-          <ArrowPathIcon class="h-5 w-5 animate-spin mr-3" />
-          Processing</span
-        ></BaseButton
-      >
+    <CardBox class="mt-2">
+      <div class="flex flex-col space-y-4">
+        <BaseButton
+          class="w-fit"
+          :disabled="pengembanganStore.isStoreLoading"
+          @click="submit"
+          color="info"
+          ><span v-if="!pengembanganStore.isStoreLoading">Submit</span
+          ><span class="flex flex-row items-center px-3" v-else>
+            <ArrowPathIcon class="h-5 w-5 animate-spin mr-3" />
+            Processing</span
+          ></BaseButton
+        >
+      </div>
     </CardBox>
   </SectionMain>
 </template>

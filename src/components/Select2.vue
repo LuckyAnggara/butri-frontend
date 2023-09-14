@@ -18,6 +18,10 @@ const props = defineProps({
     required: false,
     default: "Enter text here.",
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
   useSSR: {
     type: Boolean,
     default: false,
@@ -44,7 +48,7 @@ const props = defineProps({
     type: String,
     required: false,
     default:
-      "absolute z-50 max-w-full border-gray-700 rounded w-full dark:placeholder-gray-400 bg-white dark:bg-slate-800",
+      "absolute z-50 max-w-full border-gray-700 rounded w-full dark:placeholder-gray-400 bg-gray-100 shadow-lg dark:bg-slate-700",
   },
 });
 
@@ -105,6 +109,7 @@ function clickedOutside() {
       </div>
 
       <input
+        :disabled="disabled"
         :value="modelValue"
         :placeholder="placeholder"
         @input="handleInput"

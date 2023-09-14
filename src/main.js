@@ -3,37 +3,41 @@ import { createPinia } from "pinia";
 
 import App from "./App.vue";
 import router from "./router";
+
 import { useMainStore } from "@/stores/main.js";
 import { useStyleStore } from "@/stores/style.js";
 import { darkModeKey, styleKey } from "@/config.js";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import vClickOutside from "v-click-outside";
-
+import VueTailwindDatepicker from "vue-tailwind-datepicker";
+import moment from "moment";
 import "./css/main.css";
 
 /* Init Pinia */
 const pinia = createPinia();
 
 /* Create Vue app */
-createApp(App)
-  .use(router)
-  .use(pinia)
-  .use(vClickOutside)
-  .use(Toast, {
-    transition: "Vue-Toastification__bounce",
-    maxToasts: 20,
-    newestOnTop: true,
-  })
-  .mount("#app");
+const app = createApp(App);
+
+app.config.globalProperties = {
+  moment: moment,
+};
+
+app.use(router);
+app.use(pinia);
+app.use(vClickOutside);
+app.use(VueTailwindDatepicker);
+app.use(Toast, {
+  transition: "Vue-Toastification__bounce",
+  maxToasts: 20,
+  newestOnTop: true,
+});
+app.mount("#app");
 
 /* Init Pinia stores */
 const mainStore = useMainStore(pinia);
 const styleStore = useStyleStore(pinia);
-
-/* Fetch sample data */
-mainStore.fetch("clients");
-mainStore.fetch("history");
 
 /* App style */
 styleStore.setStyle(localStorage[styleKey] ?? "basic");
@@ -48,7 +52,7 @@ if (
 }
 
 /* Default title tag */
-const defaultDocumentTitle = "Admin One Vue 3 Tailwind";
+const defaultDocumentTitle = "Laporan Pengawasan";
 
 /* Set document title from route meta */
 router.afterEach((to) => {

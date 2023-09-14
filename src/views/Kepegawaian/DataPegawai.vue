@@ -6,7 +6,7 @@ import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.
 
 import { useRoute, useRouter } from "vue-router";
 import { usePegawaiStore } from "@/stores/pegawai/pegawai";
-import { computed, onMounted } from "vue";
+import { computed, onMounted, ref } from "vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
 import { useDebounceFn } from "@vueuse/core";
@@ -20,9 +20,6 @@ import {
 } from "@heroicons/vue/24/outline";
 import { useMainStore } from "@/stores/main";
 import BaseButton from "@/components/BaseButton.vue";
-import BaseButtons from "@/components/BaseButtons.vue";
-import BaseLevel from "@/components/BaseLevel.vue";
-import NotificationBar from "@/components/NotificationBar.vue";
 
 const search = useDebounceFn(() => {
   pegawaiStore.getData();
@@ -32,16 +29,13 @@ const router = useRouter();
 const pegawaiStore = usePegawaiStore();
 const mainStore = useMainStore();
 
+const indexDestroy = ref(0);
+
 const itemMenu = [
   {
-    function: () => {},
-    label: "Detail",
+    function: Edit,
+    label: "Edit",
     icon: DocumentTextIcon,
-  },
-  {
-    function: () => {},
-    label: "Archive",
-    icon: ArchiveBoxIcon,
   },
   {
     function: destroy,
@@ -49,6 +43,10 @@ const itemMenu = [
     icon: TrashIcon,
   },
 ];
+
+async function Edit(item) {
+  router.push({ name: "edit-pegawai", params: { id: item.id } });
+}
 
 const previousPage = computed(() => {
   return "&page=" + (pegawaiStore.currentPage - 1);
@@ -113,22 +111,11 @@ onMounted(() => {
       </div>
     </CardBox>
 
-    <NotificationBar
-      v-if="pegawaiStore.isDestroyLoading"
-      color="info"
-      :icon="mdiTableOff"
-    >
-      <span class="flex flex-row items-center">
-        <ArrowPathIcon class="h-5 w-5 animate-spin mr-3" />
-        Deleting data on progress</span
-      >
-    </NotificationBar>
-
     <CardBox class="mb-6" has-table>
       <table>
         <thead>
           <tr>
-            <th></th>
+            <th>No</th>
             <th>NIP</th>
             <th>Name</th>
             <th>Jenis Kelamin</th>
@@ -153,7 +140,7 @@ onMounted(() => {
             </td>
           </tr>
           <tr v-else v-for="(item, index) in pegawaiStore.items" :key="item.id">
-            <td>
+            <td class="text-center">
               {{ pegawaiStore.from + index }}
             </td>
             <td>
@@ -180,9 +167,26 @@ onMounted(() => {
                 <Menu as="div" class="relative inline-block text-left">
                   <div>
                     <MenuButton
-                      class="hover:scale-125 ease-in-out duration-300 flex w-full rounded-md font-medium text-black dark:text-white"
+                      :disabled="
+                        pegawaiStore.isDestroyLoading && indexDestroy == item.id
+                      "
+                      :class="
+                        pegawaiStore.isDestroyLoading && indexDestroy == item.id
+                          ? ''
+                          : 'hover:scale-125 ease-in-out duration-300'
+                      "
+                      class="flex w-full rounded-md font-medium text-black dark:text-white"
                     >
+                      <ArrowPathIcon
+                        v-if="
+                          pegawaiStore.isDestroyLoading &&
+                          indexDestroy == item.id
+                        "
+                        class="animate-spin h-5 w-5 text-black dark:text-white"
+                        aria-hidden="true"
+                      />
                       <EllipsisVerticalIcon
+                        v-else
                         class="h-5 w-5 text-black dark:text-white"
                         aria-hidden="true"
                       />

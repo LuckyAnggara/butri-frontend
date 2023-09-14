@@ -46,7 +46,7 @@ const routes = [
   },
   {
     meta: {
-      title: "Tambah Pegawai",
+      title: "Tambah Data Pegawai",
       layout: "layout-authenticated",
       requiresAuth: false,
     },
@@ -56,13 +56,63 @@ const routes = [
   },
   {
     meta: {
+      title: "Edit Data Pegawai",
+      layout: "layout-authenticated",
+      requiresAuth: false,
+    },
+    path: "/pegawai/:id/edit",
+    name: "edit-pegawai",
+    component: () => import("@/views/Kepegawaian/EditDataPegawai.vue"),
+  },
+  {
+    meta: {
       title: "Pensiun Pegawai",
       layout: "layout-authenticated",
       requiresAuth: false,
     },
-    path: "/pegawai/pensiun",
-    name: "pensiun-pegawai",
-    component: () => import("@/views/Kepegawaian/PensiunPegawai.vue"),
+    path: "/pegawai/pensiun/list",
+    name: "list-pensiun-pegawai",
+    component: () => import("@/views/Kepegawaian/DataPensiunPegawai.vue"),
+  },
+  {
+    meta: {
+      title: "Pensiun Pegawai",
+      layout: "layout-authenticated",
+      requiresAuth: false,
+    },
+    path: "/pegawai/pensiun/new",
+    name: "new-pensiun-pegawai",
+    component: () => import("@/views/Kepegawaian/NewPensiunPegawai.vue"),
+  },
+  {
+    meta: {
+      title: "Pengembangan Pegawai",
+      layout: "layout-authenticated",
+      requiresAuth: false,
+    },
+    path: "/pegawai/pengembangan/list",
+    name: "list-pengembangan-pegawai",
+    component: () => import("@/views/Kepegawaian/DataPengembanganPengawai.vue"),
+  },
+  {
+    meta: {
+      title: "Pengembangan Pegawai",
+      layout: "layout-authenticated",
+      requiresAuth: false,
+    },
+    path: "/pegawai/pengembangan/new",
+    name: "new-pengembangan-pegawai",
+    component: () => import("@/views/Kepegawaian/NewPengembanganPengawai.vue"),
+  },
+  {
+    meta: {
+      title: "Edit Data Pengembangan Pegawai",
+      layout: "layout-authenticated",
+      requiresAuth: false,
+    },
+    path: "/pegawai/pengembangan/:id/edit",
+    name: "edit-pengembangan-pegawai",
+    component: () => import("@/views/Kepegawaian/EditPengembanganPegawai.vue"),
   },
   {
     meta: {
@@ -70,9 +120,19 @@ const routes = [
       layout: "layout-authenticated",
       requiresAuth: false,
     },
-    path: "/pegawai/mutasi",
-    name: "mutasi-pegawai",
-    component: () => import("@/views/Kepegawaian/MutasiPegawai.vue"),
+    path: "/pegawai/mutasi/list",
+    name: "list-mutasi-pegawai",
+    component: () => import("@/views/Kepegawaian/DataMutasiPegawai.vue"),
+  },
+  {
+    meta: {
+      title: "Mutasi Pegawai",
+      layout: "layout-authenticated",
+      requiresAuth: false,
+    },
+    path: "/pegawai/mutasi/new",
+    name: "new-mutasi-pegawai",
+    component: () => import("@/views/Kepegawaian/NewMutasiPegawai.vue"),
   },
   {
     meta: {
