@@ -91,14 +91,12 @@ onMounted(() => {
             <FormControl
               :disabled="pegawaiStore.isStoreLoading"
               v-model="pegawaiStore.newPegawai.email"
-              required
             />
           </FormField>
           <FormField label="Nomor HP / WA" class="w-1/2">
             <FormControl
               :disabled="pegawaiStore.isStoreLoading"
               v-model="pegawaiStore.newPegawai.phone_number"
-              required
             />
           </FormField>
         </div>

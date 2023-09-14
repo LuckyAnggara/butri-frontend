@@ -19,12 +19,18 @@ const props = defineProps({
     default: "Enter text here.",
   },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 68b1049 (seep)
   disabled: {
     type: Boolean,
     default: false,
   },
+<<<<<<< HEAD
 =======
 >>>>>>> 7a8945a (ok)
+=======
+>>>>>>> 68b1049 (seep)
   useSSR: {
     type: Boolean,
     default: false,
@@ -61,6 +67,7 @@ const props = defineProps({
     default:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       "absolute z-50 max-w-full border-gray-700 rounded w-full dark:placeholder-gray-400 bg-gray-100 shadow-lg dark:bg-slate-700",
 =======
       "max-w-full focus:ring focus:outline-none border-gray-700 rounded w-full dark:placeholder-gray-400 bg-white dark:bg-slate-800",
@@ -68,6 +75,9 @@ const props = defineProps({
 =======
       "absolute z-50 max-w-full border-gray-700 rounded w-full dark:placeholder-gray-400 bg-white dark:bg-slate-800",
 >>>>>>> b48c708 (ok)
+=======
+      "absolute z-50 max-w-full border-gray-700 rounded w-full dark:placeholder-gray-400 bg-gray-100 shadow-lg dark:bg-slate-700",
+>>>>>>> 68b1049 (seep)
   },
 });
 
@@ -141,9 +151,13 @@ function clickedOutside() {
 
       <input
 <<<<<<< HEAD
+<<<<<<< HEAD
         :disabled="disabled"
 =======
 >>>>>>> 7a8945a (ok)
+=======
+        :disabled="disabled"
+>>>>>>> 68b1049 (seep)
         :value="modelValue"
         :placeholder="placeholder"
         @input="handleInput"

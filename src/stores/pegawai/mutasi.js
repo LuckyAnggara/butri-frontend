@@ -17,9 +17,18 @@ export const useMutasiStore = defineStore("mutasi", {
     isDestroyLoading: false,
     userData: null,
     form: {
+<<<<<<< HEAD
       nomor_sk: "",
       date: "",
       notes: "",
+=======
+      kegiatan: "",
+      waktu: {
+        startDate: "",
+        endDate: "",
+      },
+      tempat: "",
+>>>>>>> 68b1049 (seep)
       list: [],
       created_by: authStore.user.user.id,
     },
@@ -27,7 +36,11 @@ export const useMutasiStore = defineStore("mutasi", {
       date: [],
       searchQuery: "",
     },
+<<<<<<< HEAD
     currentLimit: 5,
+=======
+    currentLimit: { id: 5, label: "5" },
+>>>>>>> 68b1049 (seep)
   }),
   getters: {
     items(state) {
@@ -74,7 +87,11 @@ export const useMutasiStore = defineStore("mutasi", {
       this.isLoading = true;
       try {
         const response = await axiosIns.get(
+<<<<<<< HEAD
           `/mutasi?limit=${this.currentLimit}${this.searchQuery}${page}${this.dateQuery}`
+=======
+          `/mutasi?limit=${this.currentLimit.id}${this.searchQuery}${page}${this.dateQuery}`
+>>>>>>> 68b1049 (seep)
         );
         this.responses = response.data.data;
       } catch (error) {
@@ -105,6 +122,24 @@ export const useMutasiStore = defineStore("mutasi", {
         this.isStoreLoading = false;
       }
     },
+<<<<<<< HEAD
+=======
+    async showData(id = "") {
+      this.isLoading = true;
+      try {
+        const response = await axiosIns.get(`/mutasi/${id}`);
+        this.singleResponses = JSON.parse(JSON.stringify(response.data.data));
+        this.originalSingleResponses = JSON.parse(
+          JSON.stringify(response.data.data)
+        );
+      } catch (error) {
+        toast.error("Data not found", {
+          position: "bottom-right",
+        });
+      }
+      this.isLoading = false;
+    },
+>>>>>>> 68b1049 (seep)
     async destroy(id) {
       this.isDestroyLoading = true;
       setTimeout(() => {}, 500);

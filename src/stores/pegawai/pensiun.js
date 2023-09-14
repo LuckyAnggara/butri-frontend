@@ -15,24 +15,35 @@ export const usePensiunStore = defineStore("pensiun", {
     userData: null,
     form: {
 <<<<<<< HEAD
+<<<<<<< HEAD
       nomor_sk: "",
       tentang: "",
 =======
       sk: "",
 >>>>>>> b48c708 (ok)
+=======
+      nomor_sk: "",
+      tentang: "",
+>>>>>>> 68b1049 (seep)
       notes: "",
       date: "",
       list: [],
       created_by: authStore.user.user.id,
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 68b1049 (seep)
     filter: {
       date: [],
       searchQuery: "",
     },
+<<<<<<< HEAD
     currentLimit: 5,
 =======
     searchName: "",
+=======
+>>>>>>> 68b1049 (seep)
     currentLimit: { id: 5, label: "5" },
 >>>>>>> b48c708 (ok)
   }),
@@ -59,6 +70,9 @@ export const usePensiunStore = defineStore("pensiun", {
       return state.responses?.total;
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 68b1049 (seep)
     dateQuery(state) {
       if (state.filter.date.length == 0 || state.filter.date.length == null) {
         return "";
@@ -70,18 +84,25 @@ export const usePensiunStore = defineStore("pensiun", {
         state.filter.date[1]
       );
     },
+<<<<<<< HEAD
     searchQuery(state) {
       if (state.filter.searchQuery == "" || state.filter.searchQuery == null) {
         return "";
       }
       return "&query=" + state.filter.searchQuery;
 =======
+=======
+>>>>>>> 68b1049 (seep)
     searchQuery(state) {
-      if (state.searchName == "" || state.searchName == null) {
+      if (state.filter.searchQuery == "" || state.filter.searchQuery == null) {
         return "";
       }
+<<<<<<< HEAD
       return "&name=" + state.searchName;
 >>>>>>> b48c708 (ok)
+=======
+      return "&query=" + state.filter.searchQuery;
+>>>>>>> 68b1049 (seep)
     },
   },
   actions: {
@@ -90,10 +111,14 @@ export const usePensiunStore = defineStore("pensiun", {
       try {
         const response = await axiosIns.get(
 <<<<<<< HEAD
+<<<<<<< HEAD
           `/pensiun?limit=${this.currentLimit}${this.searchQuery}${page}${this.dateQuery}`
 =======
           `/employee?limit=${this.currentLimit.id}${this.searchQuery}${page}`
 >>>>>>> b48c708 (ok)
+=======
+          `/pensiun?limit=${this.currentLimit.id}${this.searchQuery}${page}${this.dateQuery}`
+>>>>>>> 68b1049 (seep)
         );
         this.responses = response.data.data;
       } catch (error) {
@@ -107,6 +132,7 @@ export const usePensiunStore = defineStore("pensiun", {
       this.isStoreLoading = true;
       try {
 <<<<<<< HEAD
+<<<<<<< HEAD
         const response = await axiosIns.post(`/pensiun`, this.form);
         if (response.status == 200) {
           toast.success("Data berhasil dibuat", {
@@ -115,6 +141,11 @@ export const usePensiunStore = defineStore("pensiun", {
         if (response.status == 200) {
           toast.success(response.message, {
 >>>>>>> b48c708 (ok)
+=======
+        const response = await axiosIns.post(`/pensiun`, this.form);
+        if (response.status == 200) {
+          toast.success("Data berhasil dibuat", {
+>>>>>>> 68b1049 (seep)
             timeout: 3000,
           });
           return true;
@@ -130,6 +161,9 @@ export const usePensiunStore = defineStore("pensiun", {
       }
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 68b1049 (seep)
     async destroy(id) {
       this.isDestroyLoading = true;
       setTimeout(() => {}, 500);
@@ -148,6 +182,7 @@ export const usePensiunStore = defineStore("pensiun", {
         this.isDestroyLoading = false;
       }
     },
+<<<<<<< HEAD
     addFormData(payload) {
       const b = this.form.list.filter((x) => x.id == payload.id);
 =======
@@ -155,6 +190,10 @@ export const usePensiunStore = defineStore("pensiun", {
       const b = this.form.list.filter((x) => x.id == payload.id);
       console.info(b);
 >>>>>>> b48c708 (ok)
+=======
+    addFormData(payload) {
+      const b = this.form.list.filter((x) => x.id == payload.id);
+>>>>>>> 68b1049 (seep)
       if (b.length > 0) {
         toast.info(`Data sudah ada`, {
           timeout: 1200,

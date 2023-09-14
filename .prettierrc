@@ -3,10 +3,14 @@
     "error",
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
       "singleQuote": false,
 =======
       "singleQuote": true,
 >>>>>>> 1795eef (ok)
+=======
+      "singleQuote": false,
+>>>>>>> 68b1049 (seep)
       "parser": "flow"
     }
   ]
