@@ -30,11 +30,7 @@ export const usePengembanganStore = defineStore("pengembangan", {
       date: [],
       searchQuery: "",
     },
-<<<<<<< HEAD
     currentLimit: 5,
-=======
-    currentLimit: { id: 5, label: "5" },
->>>>>>> 68b1049 (seep)
   }),
   getters: {
     items(state) {
@@ -81,11 +77,7 @@ export const usePengembanganStore = defineStore("pengembangan", {
       this.isLoading = true;
       try {
         const response = await axiosIns.get(
-<<<<<<< HEAD
           `/pengembangan?limit=${this.currentLimit}${this.searchQuery}${page}${this.dateQuery}`
-=======
-          `/pengembangan?limit=${this.currentLimit.id}${this.searchQuery}${page}${this.dateQuery}`
->>>>>>> 68b1049 (seep)
         );
         this.responses = response.data.data;
       } catch (error) {
